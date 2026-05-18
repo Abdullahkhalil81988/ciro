@@ -1,0 +1,105 @@
+{
+  "pipeline_run": "raasta-demo-001",
+  "model": "gemini-2.0-flash",
+  "orchestrator": "Google Antigravity / LangGraph",
+  "input": {
+    "signals": [
+      "D Chowk pe containers lage hain, traffic band hai",
+      "Heavy congestion reported near Red Zone",
+      "Political gathering expected near D-Chowk",
+      "Normal weather in Islamabad"
+    ],
+    "route_request": {"from": "G-11 Islamabad", "to": "Blue Area Islamabad"}
+  },
+  "tool_calls": [
+    {
+      "step": 1,
+      "tool": "normalize_signals",
+      "reasoning": "Normalize mixed-language signals before classification. Roman Urdu 'containers lage hain' maps to road_blockage.",
+      "input": {"signal_count": 4},
+      "output": {"crisis_signals": 3, "normalized": true},
+      "duration_ms": 312
+    },
+    {
+      "step": 2,
+      "tool": "classify_crisis",
+      "reasoning": "3 of 4 signals point to road_blockage/civil_disruption at D-Chowk. Dominant type: civil_disruption (0.91 confidence).",
+      "input": {"crisis_signal_count": 3},
+      "output": {"crisis_type": "civil_disruption", "location": "D-Chowk, Islamabad", "confidence": 0.91},
+      "duration_ms": 847
+    },
+    {
+      "step": 3,
+      "tool": "score_severity",
+      "reasoning": "D-Chowk is a high-criticality location (multiplier 1.3). Civil disruption base score 7. With 3 signals and 0.91 confidence: severity 8/10.",
+      "input": {"crisis_type": "civil_disruption", "confidence": 0.91, "location": "D-Chowk"},
+      "output": {"severity": 8, "trajectory": "worsening", "response_tier": 2},
+      "duration_ms": 623
+    },
+    {
+      "step": 4,
+      "tool": "generate_route_plan",
+      "reasoning": "Original route via Jinnah Ave passes through D-Chowk — blocked. Generating alternate via Kashmir Highway.",
+      "input": {"from": "G-11 Islamabad", "to": "Blue Area Islamabad", "crisis": "D-Chowk"},
+      "output": {
+        "originalRoute": {"name": "Via Jinnah Avenue", "risk_score": 82, "risk_level": "blocked"},
+        "safeRoute": {"name": "Via Kashmir Highway", "risk_score": 29, "risk_level": "safe"},
+        "delayAvoidedMinutes": 18
+      },
+      "duration_ms": 934
+    },
+    {
+      "step": 5,
+      "tool": "simulate_alerts",
+      "reasoning": "Severity 8 triggers immediate user notification. Target 124 users in affected radius.",
+      "input": {"location": "D-Chowk, Islamabad", "user_count": 124},
+      "output": {"delivered": 121, "delivery_rate": 0.98, "status": "sent"},
+      "duration_ms": 445
+    },
+    {
+      "step": 5,
+      "tool": "create_authority_ticket",
+      "reasoning": "Severity 8 civil disruption requires authority notification. Creating ICT traffic ticket.",
+      "input": {"crisis_type": "civil_disruption", "location": "D-Chowk", "severity": 8},
+      "output": {"ticket_id": "ICT-TRF-2026-044", "status": "open", "priority": "critical"},
+      "duration_ms": 218
+    },
+    {
+      "step": 6,
+      "tool": "update_mock_map_state",
+      "reasoning": "Mark D-Chowk as blocked zone. Publish Kashmir Highway as active safe route.",
+      "input": {"crisis_location": "D-Chowk", "safe_route": "Via Kashmir Highway"},
+      "output": {"blocked_zones_count": 1, "active_safe_routes": 1, "status": "updated"},
+      "duration_ms": 156
+    },
+    {
+      "step": 7,
+      "tool": "generate_outcome_report",
+      "reasoning": "Quantify before/after impact: risk 82→29, 18 min saved, 121 users protected.",
+      "input": {"original_risk": 82, "new_risk": 29, "delay_avoided": 18, "users_alerted": 121},
+      "output": {
+        "risk_reduction": 53,
+        "risk_reduction_pct": 64.6,
+        "delay_avoided_minutes": 18,
+        "users_alerted": 121,
+        "ticket": "ICT-TRF-2026-044",
+        "system_state_changed": true
+      },
+      "duration_ms": 543
+    }
+  ],
+  "final_outcome": {
+    "crisis_type": "civil_disruption",
+    "location": "D-Chowk, Islamabad",
+    "severity": 8,
+    "confidence": 0.91,
+    "original_risk": 82,
+    "new_risk": 29,
+    "risk_reduction": 53,
+    "delay_avoided_minutes": 18,
+    "users_alerted": 121,
+    "ticket_id": "ICT-TRF-2026-044",
+    "total_pipeline_ms": 4078
+  },
+  "antigravity_notes": "Gemini 2.0 Flash used for crisis classification, severity scoring, route safety analysis, and outcome narration. LangGraph StateGraph manages agent state transitions. All tool calls are discrete, logged, and reproducible."
+}

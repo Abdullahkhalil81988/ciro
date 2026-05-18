@@ -70,35 +70,51 @@ async def _fetch_rss() -> List[CrisisCandidate]:
     return candidates
 
 
+CITY_COORDS = {
+    "Karachi":   (24.8607, 67.0011),
+    "Lahore":    (31.5204, 74.3587),
+    "Islamabad": (33.6844, 73.0479),
+    "Peshawar":  (34.0151, 71.5249),
+    "Quetta":    (30.1798, 66.9750),
+    "Multan":    (30.1575, 71.5249),
+}
+
 async def _fetch_weather(client: httpx.AsyncClient) -> List[CrisisCandidate]:
-    if not settings.openweathermap_key:
+    if not settings.google_weather_key:
         return []
-    cities = ["Karachi", "Lahore", "Islamabad", "Peshawar", "Quetta", "Multan"]
     candidates = []
-    for city in cities:
+    for city, (lat, lng) in CITY_COORDS.items():
         try:
             resp = await client.get(
-                "https://api.openweathermap.org/data/2.5/weather",
-                params={"q": f"{city},PK", "appid": settings.openweathermap_key},
+                "https://weather.googleapis.com/v1/currentConditions:lookup",
+                params={"key": settings.google_weather_key,
+                        "location.latitude": lat,
+                        "location.longitude": lng},
                 timeout=5,
             )
             data = resp.json()
-            weather_main = data.get("weather", [{}])[0].get("main", "")
-            description = data.get("weather", [{}])[0].get("description", "")
-            # Only surface extreme weather
-            extreme = {"Thunderstorm", "Tornado", "Squall", "Ash", "Dust", "Sand"}
-            if weather_main in extreme or "heavy" in description.lower():
+            condition = data.get("weatherCondition", {}).get("description", {}).get("text", "")
+            feels_like = data.get("feelsLikeTemperature", {}).get("degrees", 0)
+            precipitation = data.get("precipitation", {}).get("probability", {}).get("percent", 0)
+
+            extreme = any([
+                precipitation > 70,
+                feels_like > 45,
+                any(w in condition.lower() for w in ["storm", "flood", "heavy rain", "tornado", "cyclone", "thunder"]),
+            ])
+            if extreme:
                 candidates.append(
                     CrisisCandidate(
                         source="weather",
-                        raw_text=f"Weather alert {city}: {weather_main} - {description}",
+                        raw_text=f"Extreme weather alert in {city}: {condition}. "
+                                 f"Feels like {feels_like}°C, precipitation probability {precipitation}%.",
                         location_hint=city,
                         timestamp=datetime.utcnow(),
                         language="en",
                     )
                 )
         except Exception as e:
-            logger.warning(f"Weather fetch for {city} failed: {e}")
+            logger.warning(f"Google Weather fetch for {city} failed: {e}")
     return candidates
 
 

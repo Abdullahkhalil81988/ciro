@@ -6,7 +6,7 @@ class Settings(BaseSettings):
     # API Keys
     gemini_api_key: str = ""      # get free from aistudio.google.com
     newsapi_key: str = ""
-    openweathermap_key: str = ""
+    google_weather_key: str = ""
     slack_webhook_url: str = ""
     sendgrid_api_key: str = ""
 

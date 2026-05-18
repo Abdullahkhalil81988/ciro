@@ -55,5 +55,9 @@ services:
     depends_on:
       - backend
 
+  # Android app: open mobile/ in Android Studio and run on emulator/device
+  # Backend URL for emulator: http://10.0.2.2:8000
+  # Backend URL for physical device: http://<your-local-IP>:8000
+
 volumes:
   pgdata:

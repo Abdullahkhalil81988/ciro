@@ -7,11 +7,11 @@ from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from api import routes, websocket  # noqa: F401 — websocket import registers broadcast
+from api import routes, websocket  # noqa: F401
 from config import settings
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(name)s %(levelname)s %(message)s")
-logger = logging.getLogger("ciro")
+logger = logging.getLogger("raasta")
 
 scheduler = AsyncIOScheduler()
 
@@ -29,15 +29,20 @@ async def lifespan(app: FastAPI):
         _scheduled_pipeline,
         "interval",
         seconds=settings.pipeline_interval_seconds,
-        id="ciro_pipeline",
+        id="raasta_pipeline",
     )
     scheduler.start()
-    logger.info(f"CIRO started. Pipeline runs every {settings.pipeline_interval_seconds}s")
+    logger.info(f"Raasta started. Pipeline runs every {settings.pipeline_interval_seconds}s")
     yield
     scheduler.shutdown()
 
 
-app = FastAPI(title="CIRO — Crisis Intelligence & Response Orchestrator", lifespan=lifespan)
+app = FastAPI(
+    title="Raasta — Crisis-Aware Route Intelligence",
+    description="7-agent LangGraph pipeline powered by Gemini 2.0 Flash",
+    version="1.0.0",
+    lifespan=lifespan,
+)
 
 app.add_middleware(
     CORSMiddleware,
