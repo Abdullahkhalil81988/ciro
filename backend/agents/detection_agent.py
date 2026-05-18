@@ -7,7 +7,7 @@ import logging
 from datetime import datetime
 from typing import List
 
-import anthropic
+import google.generativeai as genai
 
 from core.models import (
     CrisisCandidate, CrisisEvent, CrisisType,
@@ -20,35 +20,36 @@ from config import settings
 
 logger = logging.getLogger(__name__)
 
-_client = anthropic.Anthropic(api_key=settings.anthropic_api_key)
+genai.configure(api_key=settings.gemini_api_key)
+_model = genai.GenerativeModel(
+    model_name="gemini-2.0-flash",
+    generation_config={"temperature": 0.1, "max_output_tokens": 256},
+)
 
-DETECTION_SYSTEM = """You are a crisis detection classifier. Analyze the following text and return ONLY valid JSON. No prose, no markdown fences.
+DETECTION_PROMPT = """You are a crisis detection classifier. Analyze the text and return ONLY valid JSON. No prose, no markdown fences.
 
 Schema:
-{
+{{
   "p_crisis": <float 0.0-1.0>,
   "crisis_type": <"flood"|"fire"|"cyber"|"civil"|"medical"|"industrial"|"heatwave"|"road_blockage"|"unknown">,
   "location": <string or null>,
   "severity_hint": <"low"|"medium"|"high"|"critical">,
   "confidence": <float 0.0-1.0>
-}
+}}
 
-Focus on Pakistan geography when inferring locations. Recognize Urdu and Roman-Urdu crisis terms."""
+Focus on Pakistan geography. Recognize Urdu and Roman-Urdu crisis terms.
+
+Text: {text}"""
 
 
 def _llm_classify(text: str) -> DetectionResult:
     try:
-        message = _client.messages.create(
-            model="claude-haiku-4-5-20251001",
-            max_tokens=256,
-            system=DETECTION_SYSTEM,
-            messages=[{"role": "user", "content": f"Text: {text[:800]}"}],
-        )
-        raw = message.content[0].text.strip()
+        response = _model.generate_content(DETECTION_PROMPT.format(text=text[:800]))
+        raw = response.text.strip().lstrip("```json").lstrip("```").rstrip("```").strip()
         data = json.loads(raw)
         return DetectionResult(**data)
     except Exception as e:
-        logger.warning(f"LLM classification failed, using keyword fallback: {e}")
+        logger.warning(f"Gemini classification failed, using keyword fallback: {e}")
         score = keyword_score(text)
         return DetectionResult(
             p_crisis=score,

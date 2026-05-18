@@ -7,7 +7,7 @@ import logging
 from datetime import datetime
 from typing import List
 
-import anthropic
+import google.generativeai as genai
 
 from core.models import CrisisAnalysis, DispatchRecord, SituationReport
 from core.state import CIROState
@@ -15,7 +15,11 @@ from config import settings
 
 logger = logging.getLogger(__name__)
 
-_client = anthropic.Anthropic(api_key=settings.anthropic_api_key)
+genai.configure(api_key=settings.gemini_api_key)
+_model = genai.GenerativeModel(
+    model_name="gemini-2.0-flash",
+    generation_config={"temperature": 0.3, "max_output_tokens": 600},
+)
 
 REPORT_SYSTEM = """You are a professional emergency management report writer for Pakistan.
 Generate a concise situation report in plain English (3-4 paragraphs).
@@ -26,6 +30,7 @@ Be specific, factual, and action-oriented."""
 def _llm_report(analysis: CrisisAnalysis, dispatch_records: List[DispatchRecord]) -> str:
     teams_alerted = list({r.team_name for r in dispatch_records if r.analysis_id == analysis.id})
     prompt = (
+        f"{REPORT_SYSTEM}\n\n"
         f"Crisis: {analysis.crisis_type.value} in {analysis.location}\n"
         f"Severity: {analysis.severity_score}/10\n"
         f"Trajectory: {analysis.escalation_trajectory}\n"
@@ -35,13 +40,8 @@ def _llm_report(analysis: CrisisAnalysis, dispatch_records: List[DispatchRecord]
         "Write the situation report now."
     )
     try:
-        message = _client.messages.create(
-            model="claude-sonnet-4-6",
-            max_tokens=600,
-            system=REPORT_SYSTEM,
-            messages=[{"role": "user", "content": prompt}],
-        )
-        return message.content[0].text.strip()
+        response = _model.generate_content(prompt)
+        return response.text.strip()
     except Exception as e:
         logger.warning(f"Report LLM failed: {e}")
         return (

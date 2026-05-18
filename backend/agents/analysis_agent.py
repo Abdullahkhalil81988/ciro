@@ -8,7 +8,7 @@ import logging
 from datetime import datetime
 from typing import List
 
-import anthropic
+import google.generativeai as genai
 
 from core.models import CrisisAnalysis, CrisisEvent, CrisisType, ResponseTier
 from core.state import CIROState
@@ -17,14 +17,17 @@ from config import settings
 
 logger = logging.getLogger(__name__)
 
-_client = anthropic.Anthropic(api_key=settings.anthropic_api_key)
+genai.configure(api_key=settings.gemini_api_key)
+_model = genai.GenerativeModel(
+    model_name="gemini-2.0-flash",
+    generation_config={"temperature": 0.2, "max_output_tokens": 512},
+)
 
-ANALYSIS_SYSTEM = """You are a crisis analysis expert specializing in Pakistan urban emergency management.
-Given a detected crisis event, produce a structured analysis.
-Return ONLY valid JSON — no prose, no markdown.
+ANALYSIS_PROMPT = """You are a crisis analysis expert for Pakistan urban emergency management.
+Return ONLY valid JSON — no prose, no markdown fences.
 
 Schema:
-{
+{{
   "severity_score": <int 1-10>,
   "escalation_trajectory": <"stable"|"worsening"|"critical">,
   "recommended_response_tier": <1|2|3>,
@@ -32,9 +35,11 @@ Schema:
   "population_at_risk": <int estimate>,
   "executive_summary": <string 2-3 sentences>,
   "recommended_actions": [<string>, ...]
-}
+}}
 
-Response tiers: 1=local (district), 2=regional (province), 3=national (federal/army)."""
+Response tiers: 1=local (district), 2=regional (province), 3=national (federal/army).
+
+{event_details}"""
 
 POPULATION_BY_CITY = {
     "Karachi": 16_000_000, "Lahore": 13_000_000, "Faisalabad": 3_600_000,
@@ -57,23 +62,18 @@ def _severity_score_heuristic(event: CrisisEvent) -> int:
 
 
 def _llm_analyze(event: CrisisEvent) -> dict:
-    prompt = (
+    event_details = (
         f"Crisis Type: {event.crisis_type.value}\n"
         f"Location: {event.location}\n"
         f"Detection Confidence: {event.p_crisis:.2f}\n"
         f"Initial Severity Hint: {event.severity_hint.value}\n"
         f"Sources: {', '.join(event.raw_sources[:3])}\n\n"
-        "Analyze this crisis for Pakistan context. Consider population density, "
+        "Analyze for Pakistan context. Consider population density, "
         "infrastructure vulnerability, and historical patterns."
     )
     try:
-        message = _client.messages.create(
-            model="claude-sonnet-4-6",
-            max_tokens=512,
-            system=ANALYSIS_SYSTEM,
-            messages=[{"role": "user", "content": prompt}],
-        )
-        raw = message.content[0].text.strip()
+        response = _model.generate_content(ANALYSIS_PROMPT.format(event_details=event_details))
+        raw = response.text.strip().lstrip("```json").lstrip("```").rstrip("```").strip()
         return json.loads(raw)
     except Exception as e:
         logger.warning(f"Analysis LLM failed, using heuristic: {e}")

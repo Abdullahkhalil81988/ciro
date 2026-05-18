@@ -4,7 +4,7 @@ from typing import Optional
 
 class Settings(BaseSettings):
     # API Keys
-    anthropic_api_key: str = ""
+    gemini_api_key: str = ""      # get free from aistudio.google.com
     newsapi_key: str = ""
     openweathermap_key: str = ""
     slack_webhook_url: str = ""
