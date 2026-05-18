@@ -1,0 +1,15 @@
+{
+  "expo": {
+    "name": "CIRO",
+    "slug": "ciro-mobile",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "splash": { "resizeMode": "contain", "backgroundColor": "#0f172a" },
+    "scheme": "ciro",
+    "userInterfaceStyle": "dark",
+    "ios": { "supportsTablet": true },
+    "android": { "adaptiveIcon": { "backgroundColor": "#0f172a" } },
+    "plugins": ["expo-router"]
+  }
+}
