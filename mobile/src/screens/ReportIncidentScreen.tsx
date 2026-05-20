@@ -1,10 +1,26 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TextInput, ScrollView, Alert } from 'react-native';
+import { View, Text, StyleSheet, TextInput, ScrollView, Alert, TouchableOpacity } from 'react-native';
 import { PrimaryButton } from '../components/PrimaryButton';
+
+function BackHeader({ onNavigate }: { onNavigate?: (s: string) => void }) {
+  if (!onNavigate) return null;
+  return (
+    <TouchableOpacity style={bh.btn} onPress={() => onNavigate('Home')} activeOpacity={0.7}>
+      <Text style={bh.arrow}>←</Text>
+      <Text style={bh.label}>Home</Text>
+    </TouchableOpacity>
+  );
+}
+
+const bh = StyleSheet.create({
+  btn: { flexDirection: 'row', alignItems: 'center', gap: 6, paddingBottom: 8 },
+  arrow: { fontSize: 18, color: '#E83A2C', lineHeight: 22 },
+  label: { fontSize: 14, color: '#E83A2C', fontWeight: '700' },
+});
 
 const TYPES = ['Road Blockage', 'Civil Disruption', 'Flood', 'Accident', 'VIP Movement', 'Other'];
 
-export function ReportIncidentScreen() {
+export function ReportIncidentScreen({ onNavigate }: { onNavigate?: (s: string) => void }) {
   const [type, setType] = useState('');
   const [location, setLocation] = useState('');
   const [desc, setDesc] = useState('');
@@ -26,11 +42,13 @@ export function ReportIncidentScreen() {
       <Text style={styles.successSub}>Signal ID: RAA-{Date.now().toString().slice(-6)}</Text>
       <Text style={styles.successText}>Your report has been ingested by the Signal Monitor Agent and will be processed in the next pipeline run.</Text>
       <PrimaryButton label="Submit Another" onPress={() => { setSubmitted(false); setType(''); setLocation(''); setDesc(''); }} style={{ marginTop: 20 }} />
+      <PrimaryButton label="← Back to Home" onPress={() => onNavigate?.('Home')} variant="outline" style={{ marginTop: 10 }} />
     </View>
   );
 
   return (
     <ScrollView style={styles.container} contentContainerStyle={styles.content}>
+      <BackHeader onNavigate={onNavigate} />
       <Text style={styles.title}>Report Incident</Text>
       <Text style={styles.sub}>Your report feeds directly into the Raasta agent pipeline</Text>
 

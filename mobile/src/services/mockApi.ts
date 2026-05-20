@@ -70,7 +70,24 @@ export async function simulateCrisis(): Promise<SimulateResult> {
 }
 
 export async function getIncidents(): Promise<Incident[]> {
-  return tryBackend<Incident[]>('/incidents', MOCK_INCIDENTS);
+  try {
+    const res = await fetch(`${BACKEND_URL}/incidents`, { signal: AbortSignal.timeout(3000) });
+    if (res.ok) {
+      const data = await res.json();
+      const raw: any[] = Array.isArray(data) ? data : (data.incidents ?? []);
+      return raw.slice(0, 20).map((i: any) => ({
+        id: i.id,
+        type: i.type ?? 'unknown',
+        location: i.location ?? '',
+        severity: i.severity ?? 5,
+        confidence: i.confidence ?? 0.8,
+        summary: i.summary ?? '',
+        timestamp: i.detected_at ?? i.timestamp ?? new Date().toISOString(),
+        status: i.trajectory === 'stable' ? 'resolved' : 'active',
+      }));
+    }
+  } catch {}
+  return MOCK_INCIDENTS;
 }
 
 export async function planRoute(from: string, to: string): Promise<SimulateResult> {

@@ -15,7 +15,7 @@ export function SplashScreen({ onDone }: Props) {
       </View>
       <View style={styles.badge}>
         <Text style={styles.badgeText}>Powered by Gemini 2.0 Flash</Text>
-        <Text style={styles.badgeSub}>Google Antigravity Hackathon 2025</Text>
+        <Text style={styles.badgeSub}>Google Antigravity Hackathon 2026</Text>
       </View>
     </View>
   );

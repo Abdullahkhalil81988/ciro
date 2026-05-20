@@ -6,6 +6,7 @@ import { EventsPage } from "./pages/EventsPage";
 import { MapPage } from "./pages/MapPage";
 import { AlertsPage } from "./pages/AlertsPage";
 import { SimulatePage } from "./pages/SimulatePage";
+import { DevConsole } from "./pages/DevConsole";
 import { useWebSocket } from "./hooks/useWebSocket";
 
 export default function App() {
@@ -20,6 +21,7 @@ export default function App() {
         <Route path="/map" element={<MapPage />} />
         <Route path="/alerts" element={<AlertsPage />} />
         <Route path="/simulate" element={<SimulatePage />} />
+        <Route path="/dev-console" element={<DevConsole />} />
       </Routes>
     </>
   );

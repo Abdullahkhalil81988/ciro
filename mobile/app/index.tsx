@@ -25,8 +25,8 @@ export default function Page() {
       case 'Home': return <HomeScreen onNavigate={nav} />;
       case 'RoutePlanner': return <RoutePlannerScreen onNavigate={nav} />;
       case 'RouteRisk': return <RouteRiskScreen onNavigate={nav} />;
-      case 'IncidentFeed': return <IncidentFeedScreen />;
-      case 'ReportIncident': return <ReportIncidentScreen />;
+      case 'IncidentFeed': return <IncidentFeedScreen onNavigate={nav} />;
+      case 'ReportIncident': return <ReportIncidentScreen onNavigate={nav} />;
       case 'AgentTrace': return <AgentTraceScreen onNavigate={nav} />;
       case 'Outcome': return <OutcomeScreen onNavigate={nav} />;
       case 'Demo': return <DemoControlScreen onNavigate={nav} />;
