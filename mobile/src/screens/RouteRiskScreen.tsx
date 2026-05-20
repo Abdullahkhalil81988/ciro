@@ -59,19 +59,19 @@ export function RouteRiskScreen({ onNavigate }: Props) {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#0F172A' },
+  container: { flex: 1, backgroundColor: '#0A0A0A' },
   content: { padding: 16, paddingTop: 56 },
-  title: { fontSize: 22, fontWeight: '800', color: '#F1F5F9', marginBottom: 20 },
+  title: { fontSize: 22, fontWeight: '800', color: '#F0F0F0', marginBottom: 20 },
   rings: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginBottom: 20, gap: 12 },
   arrow: { alignItems: 'center' },
-  arrowText: { fontSize: 24, color: '#334155' },
+  arrowText: { fontSize: 24, color: '#222222' },
   saved: { fontSize: 12, color: '#22C55E', fontWeight: '700' },
   crisisBox: { backgroundColor: '#EF444418', borderRadius: 12, padding: 14, borderWidth: 1, borderColor: '#EF444455', marginBottom: 14 },
   crisisLabel: { fontSize: 10, color: '#EF4444', fontWeight: '700', letterSpacing: 1.5, marginBottom: 4 },
   crisisType: { fontSize: 16, fontWeight: '800', color: '#FCA5A5', marginBottom: 4 },
-  crisisLocation: { fontSize: 12, color: '#94A3B8', marginBottom: 6 },
-  crisisSummary: { fontSize: 13, color: '#CBD5E1', lineHeight: 18, marginBottom: 10 },
+  crisisLocation: { fontSize: 12, color: '#888888', marginBottom: 6 },
+  crisisSummary: { fontSize: 13, color: '#CCCCCC', lineHeight: 18, marginBottom: 10 },
   crisisMetrics: { flexDirection: 'row', gap: 8 },
-  empty: { flex: 1, backgroundColor: '#0F172A', alignItems: 'center', justifyContent: 'center' },
-  emptyText: { color: '#64748B', fontSize: 16 },
+  empty: { flex: 1, backgroundColor: '#0A0A0A', alignItems: 'center', justifyContent: 'center' },
+  emptyText: { color: '#666666', fontSize: 16 },
 });

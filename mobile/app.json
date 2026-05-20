@@ -5,17 +5,16 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "userInterfaceStyle": "dark",
-    "backgroundColor": "#0F172A",
+    "backgroundColor": "#0A0A0A",
     "splash": {
-      "backgroundColor": "#0F172A",
+      "backgroundColor": "#0A0A0A",
       "resizeMode": "contain"
     },
     "ios": { "supportsTablet": false },
     "android": {
-      "adaptiveIcon": { "backgroundColor": "#0F172A" },
+      "adaptiveIcon": { "backgroundColor": "#0A0A0A" },
       "package": "com.raasta.app"
     },
-    "scheme": "raasta",
-    "plugins": ["expo-router"]
+    "scheme": "raasta"
   }
 }

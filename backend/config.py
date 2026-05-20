@@ -18,7 +18,7 @@ class Settings(BaseSettings):
     app_name: str = "CIRO"
     debug: bool = True
     pipeline_interval_seconds: int = 30
-    detection_threshold: float = 0.72
+    detection_threshold: float = 0.35
     keyword_prefilter_threshold: float = 0.2
 
     # JWT (dashboard auth)

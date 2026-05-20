@@ -1,5 +1,5 @@
 import { SeverityBadge } from "./SeverityBadge";
-import type { CrisisEvent } from "../types";
+import type { CrisisEvent } from "../../types";
 
 const TYPE_EMOJI: Record<string, string> = {
   flood: "🌊", fire: "🔥", cyber: "💻", civil: "👥",

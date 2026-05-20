@@ -15,5 +15,5 @@ export function MetricPill({ label, value, color = '#3B82F6' }: Props) {
 const styles = StyleSheet.create({
   pill: { borderRadius: 10, padding: 10, alignItems: 'center', minWidth: 70 },
   value: { fontSize: 18, fontWeight: '800' },
-  label: { fontSize: 10, color: '#94A3B8', marginTop: 2, textAlign: 'center' },
+  label: { fontSize: 10, color: '#888888', marginTop: 2, textAlign: 'center' },
 });

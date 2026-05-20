@@ -56,15 +56,15 @@ export function AgentTraceScreen({ onNavigate }: Props) {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#0F172A' },
+  container: { flex: 1, backgroundColor: '#0A0A0A' },
   content: { padding: 16, paddingTop: 56 },
-  title: { fontSize: 22, fontWeight: '800', color: '#F1F5F9', marginBottom: 2 },
+  title: { fontSize: 22, fontWeight: '800', color: '#F0F0F0', marginBottom: 2 },
   runId: { fontSize: 11, color: '#475569', fontFamily: 'monospace', marginBottom: 16 },
   summary: { flexDirection: 'row', gap: 8, marginBottom: 20, flexWrap: 'wrap' },
-  pipeline: { backgroundColor: '#1E293B', borderRadius: 12, padding: 16, marginBottom: 16 },
+  pipeline: { backgroundColor: '#141414', borderRadius: 12, padding: 16, marginBottom: 16 },
   footer: {},
-  empty: { flex: 1, backgroundColor: '#0F172A', alignItems: 'center', justifyContent: 'center', padding: 32 },
+  empty: { flex: 1, backgroundColor: '#0A0A0A', alignItems: 'center', justifyContent: 'center', padding: 32 },
   emptyIcon: { fontSize: 48, marginBottom: 12 },
-  emptyTitle: { fontSize: 22, fontWeight: '800', color: '#F1F5F9', marginBottom: 8 },
-  emptyText: { fontSize: 13, color: '#64748B', textAlign: 'center', lineHeight: 19 },
+  emptyTitle: { fontSize: 22, fontWeight: '800', color: '#F0F0F0', marginBottom: 8 },
+  emptyText: { fontSize: 13, color: '#666666', textAlign: 'center', lineHeight: 19 },
 });

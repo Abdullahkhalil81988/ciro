@@ -13,14 +13,14 @@ export function AgentStep({ step, index, isLast }: Props) {
   return (
     <View style={styles.wrapper}>
       <View style={styles.left}>
-        <View style={[styles.dot, { backgroundColor: isDone ? color : '#1E293B', borderColor: color, borderWidth: 2 }]}>
+        <View style={[styles.dot, { backgroundColor: isDone ? color : '#141414', borderColor: color, borderWidth: 2 }]}>
           {step.status === 'running' ? (
             <ActivityIndicator size="small" color={color} />
           ) : (
-            <Text style={[styles.num, { color: isDone ? '#0F172A' : color }]}>{index + 1}</Text>
+            <Text style={[styles.num, { color: isDone ? '#0A0A0A' : color }]}>{index + 1}</Text>
           )}
         </View>
-        {!isLast && <View style={[styles.line, { backgroundColor: isDone ? color + '55' : '#1E293B' }]} />}
+        {!isLast && <View style={[styles.line, { backgroundColor: isDone ? color + '55' : '#141414' }]} />}
       </View>
       <View style={styles.content}>
         <Text style={[styles.agentName, { color }]}>{step.agent}</Text>
@@ -39,6 +39,6 @@ const styles = StyleSheet.create({
   num: { fontSize: 12, fontWeight: '800' },
   content: { flex: 1, paddingTop: 4, paddingBottom: 14 },
   agentName: { fontSize: 13, fontWeight: '700', marginBottom: 2 },
-  detail: { fontSize: 12, color: '#94A3B8', lineHeight: 17 },
+  detail: { fontSize: 12, color: '#888888', lineHeight: 17 },
   duration: { fontSize: 10, color: '#475569', marginTop: 3 },
 });

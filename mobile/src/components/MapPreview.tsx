@@ -24,16 +24,16 @@ export function MapPreview({ showCrisis = false, showAlternate = false, width = 
       <Svg width={width} height={height}>
         {/* Grid lines */}
         {[40, 80, 120, 160].map(y => (
-          <Line key={y} x1={0} y1={y} x2={width} y2={y} stroke="#1E293B" strokeWidth={1} />
+          <Line key={y} x1={0} y1={y} x2={width} y2={y} stroke="#141414" strokeWidth={1} />
         ))}
         {[60, 120, 180, 240, 300].map(x => (
-          <Line key={x} x1={x} y1={0} x2={x} y2={height} stroke="#1E293B" strokeWidth={1} />
+          <Line key={x} x1={x} y1={0} x2={x} y2={height} stroke="#141414" strokeWidth={1} />
         ))}
 
         {/* Original route — red/orange if crisis shown */}
         <Path
           d={`M ${G11.x} ${G11.y} Q ${F8.x} ${F8.y} ${DCowk.x} ${DCowk.y} L ${BlueArea.x} ${BlueArea.y}`}
-          stroke={showCrisis ? '#EF4444' : '#94A3B8'}
+          stroke={showCrisis ? '#EF4444' : '#888888'}
           strokeWidth={showCrisis ? 3 : 2}
           fill="none"
           strokeDasharray={showCrisis ? '6 3' : undefined}
@@ -60,8 +60,8 @@ export function MapPreview({ showCrisis = false, showAlternate = false, width = 
         {showCrisis && <Circle cx={DCowk.x} cy={DCowk.y} r={5} fill="#EF4444" />}
 
         {/* Labels */}
-        <SvgText x={G11.x - 5} y={G11.y + 16} fontSize={9} fill="#94A3B8">G-11</SvgText>
-        <SvgText x={BlueArea.x - 20} y={BlueArea.y + 16} fontSize={9} fill="#94A3B8">Blue Area</SvgText>
+        <SvgText x={G11.x - 5} y={G11.y + 16} fontSize={9} fill="#888888">G-11</SvgText>
+        <SvgText x={BlueArea.x - 20} y={BlueArea.y + 16} fontSize={9} fill="#888888">Blue Area</SvgText>
         {showCrisis && <SvgText x={DCowk.x - 22} y={DCowk.y - 10} fontSize={9} fill="#EF4444">D-Chowk ⚠</SvgText>}
         {showAlternate && <SvgText x={Kashmir.x - 28} y={Kashmir.y - 8} fontSize={9} fill="#22C55E">Kashmir Hwy</SvgText>}
       </Svg>
@@ -74,9 +74,9 @@ export function MapPreview({ showCrisis = false, showAlternate = false, width = 
 }
 
 const styles = StyleSheet.create({
-  container: { backgroundColor: '#0F172A', borderRadius: 12, overflow: 'hidden' },
+  container: { backgroundColor: '#0A0A0A', borderRadius: 12, overflow: 'hidden' },
   legend: { position: 'absolute', bottom: 6, right: 8, flexDirection: 'row', gap: 8 },
   legendItem: { flexDirection: 'row', alignItems: 'center', gap: 3 },
   dot: { width: 6, height: 6, borderRadius: 3 },
-  legendText: { fontSize: 9, color: '#94A3B8' },
+  legendText: { fontSize: 9, color: '#888888' },
 });

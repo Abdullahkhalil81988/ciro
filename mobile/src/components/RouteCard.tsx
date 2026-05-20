@@ -38,19 +38,19 @@ function MetricItem({ value, label, color }: { value: string; label: string; col
   return (
     <View style={{ alignItems: 'center' }}>
       <Text style={{ color, fontSize: 16, fontWeight: '800' }}>{value}</Text>
-      <Text style={{ color: '#94A3B8', fontSize: 10 }}>{label}</Text>
+      <Text style={{ color: '#888888', fontSize: 10 }}>{label}</Text>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  card: { backgroundColor: '#1E293B', borderRadius: 12, padding: 14, marginBottom: 10 },
+  card: { backgroundColor: '#141414', borderRadius: 12, padding: 14, marginBottom: 10 },
   header: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 10 },
-  variantLabel: { fontSize: 10, fontWeight: '700', color: '#94A3B8', letterSpacing: 1 },
+  variantLabel: { fontSize: 10, fontWeight: '700', color: '#888888', letterSpacing: 1 },
   route: { marginBottom: 8 },
-  point: { color: '#F1F5F9', fontSize: 14, fontWeight: '600' },
+  point: { color: '#F0F0F0', fontSize: 14, fontWeight: '600' },
   arrow: { color: '#475569', fontSize: 12, marginVertical: 2 },
-  rec: { backgroundColor: '#0F172A', borderRadius: 8, padding: 8, marginBottom: 8 },
-  recText: { color: '#94A3B8', fontSize: 12, lineHeight: 18 },
+  rec: { backgroundColor: '#0A0A0A', borderRadius: 8, padding: 8, marginBottom: 8 },
+  recText: { color: '#888888', fontSize: 12, lineHeight: 18 },
   metrics: { flexDirection: 'row', gap: 16 },
 });

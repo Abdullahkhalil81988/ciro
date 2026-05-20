@@ -118,40 +118,39 @@ raasta/
 
 ```bash
 cd backend
+python3 -m venv .venv
+source .venv/bin/activate
 pip install -r requirements.txt
-cp .env.example .env
-# Fill in API keys (see below)
 uvicorn main:app --reload --port 8000
 ```
 
-### 2. Docker (recommended)
+Backend at `http://localhost:8000` · Docs at `http://localhost:8000/docs`
+
+### 2. Web Console
 
 ```bash
-docker-compose up -d
+cd frontend
+npm install
+npm run dev
+# Opens at http://localhost:3001
 ```
 
-Backend available at `http://localhost:8000`  
-API docs at `http://localhost:8000/docs`
+### 3. Mobile App
 
-### 3. Run Demo Scenario
+```bash
+cd mobile
+npm install --legacy-peer-deps
+npx expo start
+# Press w for browser, scan QR with Expo Go for phone
+```
+
+### 4. Run Demo
 
 ```bash
 curl -X POST http://localhost:8000/demo/d-chowk-protest
 ```
 
-Then poll:
-```bash
-curl http://localhost:8000/incidents
-curl http://localhost:8000/agent-traces/<run_id>
-```
-
-### 4. Android App
-
-1. Open `mobile/` in Android Studio
-2. In `app/build.gradle.kts`, update `MAPS_API_KEY` with your Google Maps API key
-3. For emulator: backend URL is already `http://10.0.2.2:8000`
-4. For physical device: update `BACKEND_URL` in `build.gradle.kts` to your machine's local IP
-5. Run on device/emulator
+Or click **D-Chowk Demo** in the web console.
 
 ---
 

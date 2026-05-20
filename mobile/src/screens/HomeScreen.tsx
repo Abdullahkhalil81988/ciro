@@ -48,8 +48,8 @@ export function HomeScreen({ onNavigate }: Props) {
 
       <View style={styles.metrics}>
         <MetricPill label="Distance" value="8.2 km" color="#3B82F6" />
-        <MetricPill label="ETA" value="22 min" color="#22C55E" />
-        <MetricPill label="Risk" value={scanResult ? `${scanResult.route.newRisk}` : '--'} color={scanResult ? '#22C55E' : '#64748B'} />
+        <MetricPill label="ETA" value="22 min" color="#4ade80" />
+        <MetricPill label="Risk" value={scanResult ? `${scanResult.route.newRisk}` : '--'} color={scanResult ? '#E83A2C' : '#666666'} />
       </View>
 
       {scanResult && (
@@ -83,24 +83,24 @@ export function HomeScreen({ onNavigate }: Props) {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#0F172A' },
+  container: { flex: 1, backgroundColor: '#0A0A0A' },
   content: { padding: 16, paddingTop: 56 },
   header: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 },
-  appName: { fontSize: 28, fontWeight: '900', color: '#22C55E', letterSpacing: 1 },
-  liveDot: { backgroundColor: '#22C55E22', borderRadius: 8, paddingHorizontal: 10, paddingVertical: 4, borderWidth: 1, borderColor: '#22C55E' },
-  liveText: { color: '#22C55E', fontSize: 11, fontWeight: '700' },
-  sectionLabel: { fontSize: 10, color: '#64748B', fontWeight: '700', letterSpacing: 1.5, marginBottom: 8 },
-  routeBar: { flexDirection: 'row', backgroundColor: '#1E293B', borderRadius: 12, padding: 14, alignItems: 'center', marginBottom: 12 },
+  appName: { fontSize: 28, fontWeight: '900', color: '#E83A2C', letterSpacing: 1 },
+  liveDot: { backgroundColor: '#E83A2C22', borderRadius: 8, paddingHorizontal: 10, paddingVertical: 4, borderWidth: 1, borderColor: '#E83A2C' },
+  liveText: { color: '#E83A2C', fontSize: 11, fontWeight: '700' },
+  sectionLabel: { fontSize: 10, color: '#666666', fontWeight: '700', letterSpacing: 1.5, marginBottom: 8 },
+  routeBar: { flexDirection: 'row', backgroundColor: '#141414', borderRadius: 12, padding: 14, alignItems: 'center', marginBottom: 12 },
   routePoint: { flex: 1 },
-  routePointLabel: { fontSize: 9, color: '#64748B', fontWeight: '700', letterSpacing: 1 },
-  routePointValue: { fontSize: 15, color: '#F1F5F9', fontWeight: '700', marginTop: 2 },
-  arrow: { fontSize: 20, color: '#334155', marginHorizontal: 8 },
+  routePointLabel: { fontSize: 9, color: '#666666', fontWeight: '700', letterSpacing: 1 },
+  routePointValue: { fontSize: 15, color: '#F0F0F0', fontWeight: '700', marginTop: 2 },
+  arrow: { fontSize: 20, color: '#222222', marginHorizontal: 8 },
   metrics: { flexDirection: 'row', justifyContent: 'space-around', marginVertical: 12 },
   alertBanner: { backgroundColor: '#EF444422', borderRadius: 10, padding: 12, borderWidth: 1, borderColor: '#EF4444', marginBottom: 12 },
   alertText: { color: '#FCA5A5', fontSize: 13, fontWeight: '700' },
-  alertSub: { color: '#94A3B8', fontSize: 11, marginTop: 2 },
+  alertSub: { color: '#888888', fontSize: 11, marginTop: 2 },
   scanBtn: { marginBottom: 16 },
   quickNav: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
-  navBtn: { backgroundColor: '#1E293B', borderRadius: 10, paddingVertical: 12, paddingHorizontal: 14, flex: 1, minWidth: '45%' },
-  navBtnText: { color: '#CBD5E1', fontSize: 13, fontWeight: '600', textAlign: 'center' },
+  navBtn: { backgroundColor: '#141414', borderRadius: 10, paddingVertical: 12, paddingHorizontal: 14, flex: 1, minWidth: '45%' },
+  navBtnText: { color: '#CCCCCC', fontSize: 13, fontWeight: '600', textAlign: 'center' },
 });

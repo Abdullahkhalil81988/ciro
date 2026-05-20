@@ -30,15 +30,15 @@ export function ActionLogCard({ actions, ticketId, usersAlerted }: Props) {
 }
 
 const styles = StyleSheet.create({
-  card: { backgroundColor: '#1E293B', borderRadius: 12, padding: 14 },
-  title: { fontSize: 13, fontWeight: '700', color: '#F1F5F9', marginBottom: 10 },
+  card: { backgroundColor: '#141414', borderRadius: 12, padding: 14 },
+  title: { fontSize: 13, fontWeight: '700', color: '#F0F0F0', marginBottom: 10 },
   row: { flexDirection: 'row', alignItems: 'flex-start', marginBottom: 6 },
   check: { color: '#22C55E', fontSize: 14, fontWeight: '700', marginRight: 8, width: 16 },
-  action: { color: '#CBD5E1', fontSize: 13, flex: 1, lineHeight: 18 },
-  ticket: { flexDirection: 'row', alignItems: 'center', marginTop: 8, paddingTop: 8, borderTopWidth: 1, borderTopColor: '#334155' },
-  ticketLabel: { color: '#64748B', fontSize: 11, marginRight: 8 },
+  action: { color: '#CCCCCC', fontSize: 13, flex: 1, lineHeight: 18 },
+  ticket: { flexDirection: 'row', alignItems: 'center', marginTop: 8, paddingTop: 8, borderTopWidth: 1, borderTopColor: '#222222' },
+  ticketLabel: { color: '#666666', fontSize: 11, marginRight: 8 },
   ticketId: { color: '#F97316', fontSize: 12, fontWeight: '700', fontFamily: 'monospace' },
   users: { flexDirection: 'row', alignItems: 'center', marginTop: 4 },
   usersNum: { color: '#3B82F6', fontSize: 18, fontWeight: '800' },
-  usersLabel: { color: '#94A3B8', fontSize: 12 },
+  usersLabel: { color: '#888888', fontSize: 12 },
 });

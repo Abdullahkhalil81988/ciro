@@ -66,14 +66,14 @@ export function RoutePlannerScreen({ onNavigate }: Props) {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#0F172A' },
+  container: { flex: 1, backgroundColor: '#0A0A0A' },
   content: { padding: 16, paddingTop: 56 },
-  title: { fontSize: 24, fontWeight: '800', color: '#F1F5F9', marginBottom: 4 },
-  sub: { fontSize: 13, color: '#64748B', marginBottom: 20 },
-  label: { fontSize: 10, color: '#64748B', fontWeight: '700', letterSpacing: 1.5, marginBottom: 6, marginTop: 12 },
-  input: { backgroundColor: '#1E293B', borderRadius: 10, padding: 14, color: '#F1F5F9', fontSize: 15, borderWidth: 1, borderColor: '#334155' },
+  title: { fontSize: 24, fontWeight: '800', color: '#F0F0F0', marginBottom: 4 },
+  sub: { fontSize: 13, color: '#666666', marginBottom: 20 },
+  label: { fontSize: 10, color: '#666666', fontWeight: '700', letterSpacing: 1.5, marginBottom: 6, marginTop: 12 },
+  input: { backgroundColor: '#141414', borderRadius: 10, padding: 14, color: '#F0F0F0', fontSize: 15, borderWidth: 1, borderColor: '#222222' },
   presets: { flexDirection: 'row', flexWrap: 'wrap', gap: 6, marginBottom: 12 },
   preset: { flex: 1, minWidth: '45%', paddingVertical: 10 },
   btn: { marginTop: 4, marginBottom: 16 },
-  sectionTitle: { fontSize: 13, fontWeight: '700', color: '#94A3B8', marginVertical: 10, letterSpacing: 1 },
+  sectionTitle: { fontSize: 13, fontWeight: '700', color: '#888888', marginVertical: 10, letterSpacing: 1 },
 });

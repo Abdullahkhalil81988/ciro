@@ -14,7 +14,7 @@ export function SafetyScoreRing({ score, size = 100, label }: Props) {
     <View style={{ alignItems: 'center' }}>
       <View style={{ width: size, height: size, alignItems: 'center', justifyContent: 'center' }}>
         <Svg width={size} height={size} style={StyleSheet.absoluteFill}>
-          <Circle cx={size / 2} cy={size / 2} r={radius} stroke="#1E293B" strokeWidth={10} fill="none" />
+          <Circle cx={size / 2} cy={size / 2} r={radius} stroke="#141414" strokeWidth={10} fill="none" />
           <Circle
             cx={size / 2} cy={size / 2} r={radius}
             stroke={color} strokeWidth={10} fill="none"
@@ -33,6 +33,6 @@ export function SafetyScoreRing({ score, size = 100, label }: Props) {
 
 const styles = StyleSheet.create({
   score: { fontWeight: '800' },
-  sub: { fontSize: 10, color: '#94A3B8', marginTop: -2 },
-  label: { fontSize: 11, color: '#94A3B8', marginTop: 4 },
+  sub: { fontSize: 10, color: '#888888', marginTop: -2 },
+  label: { fontSize: 11, color: '#888888', marginTop: 4 },
 });

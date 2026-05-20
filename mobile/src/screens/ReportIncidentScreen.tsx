@@ -53,18 +53,18 @@ export function ReportIncidentScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#0F172A' },
+  container: { flex: 1, backgroundColor: '#0A0A0A' },
   content: { padding: 16, paddingTop: 56 },
-  title: { fontSize: 22, fontWeight: '800', color: '#F1F5F9', marginBottom: 4 },
-  sub: { fontSize: 12, color: '#64748B', marginBottom: 20 },
-  label: { fontSize: 10, color: '#64748B', fontWeight: '700', letterSpacing: 1.5, marginBottom: 8, marginTop: 14 },
+  title: { fontSize: 22, fontWeight: '800', color: '#F0F0F0', marginBottom: 4 },
+  sub: { fontSize: 12, color: '#666666', marginBottom: 20 },
+  label: { fontSize: 10, color: '#666666', fontWeight: '700', letterSpacing: 1.5, marginBottom: 8, marginTop: 14 },
   typeGrid: { flexDirection: 'row', flexWrap: 'wrap', gap: 6 },
   typeBtn: { minWidth: '30%', flex: 1, paddingVertical: 10, fontSize: 12 },
-  input: { backgroundColor: '#1E293B', borderRadius: 10, padding: 14, color: '#F1F5F9', fontSize: 14, borderWidth: 1, borderColor: '#334155' },
+  input: { backgroundColor: '#141414', borderRadius: 10, padding: 14, color: '#F0F0F0', fontSize: 14, borderWidth: 1, borderColor: '#222222' },
   multiline: { minHeight: 100, textAlignVertical: 'top' },
-  successContainer: { flex: 1, backgroundColor: '#0F172A', alignItems: 'center', justifyContent: 'center', padding: 32 },
+  successContainer: { flex: 1, backgroundColor: '#0A0A0A', alignItems: 'center', justifyContent: 'center', padding: 32 },
   successIcon: { fontSize: 56, marginBottom: 12 },
   successTitle: { fontSize: 24, fontWeight: '800', color: '#22C55E' },
-  successSub: { fontSize: 12, color: '#64748B', fontFamily: 'monospace', marginTop: 4 },
-  successText: { fontSize: 13, color: '#94A3B8', textAlign: 'center', lineHeight: 19, marginTop: 12 },
+  successSub: { fontSize: 12, color: '#666666', fontFamily: 'monospace', marginTop: 4 },
+  successText: { fontSize: 13, color: '#888888', textAlign: 'center', lineHeight: 19, marginTop: 12 },
 });

@@ -37,9 +37,9 @@ export function IncidentFeedScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#0F172A', paddingHorizontal: 16, paddingTop: 56 },
-  title: { fontSize: 22, fontWeight: '800', color: '#F1F5F9', marginBottom: 2 },
-  sub: { fontSize: 12, color: '#64748B', marginBottom: 14 },
+  container: { flex: 1, backgroundColor: '#0A0A0A', paddingHorizontal: 16, paddingTop: 56 },
+  title: { fontSize: 22, fontWeight: '800', color: '#F0F0F0', marginBottom: 2 },
+  sub: { fontSize: 12, color: '#666666', marginBottom: 14 },
   list: { paddingBottom: 20 },
-  empty: { color: '#64748B', textAlign: 'center', marginTop: 40, fontSize: 15 },
+  empty: { color: '#666666', textAlign: 'center', marginTop: 40, fontSize: 15 },
 });

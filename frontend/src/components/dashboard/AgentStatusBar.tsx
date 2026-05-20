@@ -1,6 +1,6 @@
-import { useCiroStore } from "../store/useCiroStore";
+import { useCiroStore } from "../../store/useCiroStore";
 
-const AGENTS = ["Monitor", "Detect", "Analyze", "Dispatch", "Report"];
+const AGENTS = ["Monitor", "Detect", "Analyze", "Route", "Dispatch", "Outcome", "Report"];
 
 export function AgentStatusBar() {
   const { connected, health } = useCiroStore();

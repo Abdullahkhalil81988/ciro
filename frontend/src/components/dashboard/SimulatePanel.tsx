@@ -5,7 +5,7 @@ const API = import.meta.env.VITE_API_URL || "http://localhost:8000";
 const CRISIS_TYPES = ["flood", "fire", "cyber", "civil", "medical", "industrial", "heatwave", "road_blockage"];
 const PK_CITIES = ["Karachi", "Lahore", "Islamabad", "Rawalpindi", "Peshawar", "Quetta", "Multan", "Faisalabad"];
 
-export function SimulatePanel() {
+export function SimulatePanel({ onSimulated }: { onSimulated?: () => void }) {
   const [type, setType] = useState("flood");
   const [location, setLocation] = useState("Karachi");
   const [severity, setSeverity] = useState(8);
@@ -24,7 +24,10 @@ export function SimulatePanel() {
         body: JSON.stringify({ crisis_type: type, location, severity_override: severity, description: desc }),
       });
       const data = await res.json();
-      setResult(JSON.stringify(data.simulated_event, null, 2));
+      const display = data.simulated_event ?? data;
+      setResult(JSON.stringify(display, null, 2));
+      // Refresh incident feed after backend processes the simulation
+      setTimeout(() => onSimulated?.(), 2500);
     } catch (err) {
       setResult("Error: " + err);
     } finally {

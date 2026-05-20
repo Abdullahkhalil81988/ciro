@@ -11,9 +11,9 @@ interface Props {
 }
 
 export function PrimaryButton({ label, onPress, loading, disabled, variant = 'primary', style }: Props) {
-  const bg = variant === 'primary' ? '#22C55E' : variant === 'danger' ? '#EF4444' : 'transparent';
-  const border = variant === 'outline' ? { borderWidth: 1, borderColor: '#22C55E' } : {};
-  const textColor = variant === 'outline' ? '#22C55E' : '#0F172A';
+  const bg = variant === 'primary' ? '#E83A2C' : variant === 'danger' ? '#EF4444' : 'transparent';
+  const border = variant === 'outline' ? { borderWidth: 1, borderColor: '#E83A2C' } : {};
+  const textColor = variant === 'outline' ? '#E83A2C' : '#0A0A0A';
 
   return (
     <TouchableOpacity

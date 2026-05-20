@@ -19,7 +19,7 @@ logger = logging.getLogger(__name__)
 
 genai.configure(api_key=settings.gemini_api_key)
 _model = genai.GenerativeModel(
-    model_name="gemini-2.0-flash",
+    model_name="gemini-2.0-flash-lite",
     generation_config={"temperature": 0.2, "max_output_tokens": 512},
 )
 

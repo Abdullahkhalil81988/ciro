@@ -1,5 +1,4 @@
 """Raasta FastAPI routes."""
-import asyncio
 import uuid
 import logging
 from datetime import datetime
@@ -69,7 +68,7 @@ async def _run_pipeline(run_id: str, route_request: Optional[RouteRequest] = Non
     logger.info(f"Pipeline run {run_id} starting")
     state = initial_state(run_id, route_request=route_request)
     try:
-        final_state = await asyncio.to_thread(raasta_graph.invoke, state)
+        final_state = await raasta_graph.ainvoke(state)
 
         _run_history.append({
             "run_id": run_id,

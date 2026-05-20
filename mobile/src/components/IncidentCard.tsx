@@ -20,7 +20,7 @@ const STATUS_COLOR: Record<string, string> = {
 
 export function IncidentCard({ incident }: Props) {
   const severityColor = incident.severity >= 7 ? '#EF4444' : incident.severity >= 5 ? '#F97316' : '#22C55E';
-  const statusColor = STATUS_COLOR[incident.status] || '#94A3B8';
+  const statusColor = STATUS_COLOR[incident.status] || '#888888';
 
   return (
     <View style={styles.card} accessibilityRole="button" accessibilityLabel={`${incident.type} incident at ${incident.location}`}>
@@ -51,16 +51,16 @@ function formatAge(ts: string): string {
 }
 
 const styles = StyleSheet.create({
-  card: { backgroundColor: '#1E293B', borderRadius: 12, padding: 14, marginBottom: 10 },
+  card: { backgroundColor: '#141414', borderRadius: 12, padding: 14, marginBottom: 10 },
   header: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 6 },
-  type: { fontSize: 14, fontWeight: '700', color: '#F1F5F9' },
+  type: { fontSize: 14, fontWeight: '700', color: '#F0F0F0' },
   statusBadge: { borderRadius: 5, paddingHorizontal: 7, paddingVertical: 2 },
   statusText: { fontSize: 9, fontWeight: '700', letterSpacing: 0.8 },
-  location: { fontSize: 12, color: '#94A3B8', marginBottom: 4 },
-  summary: { fontSize: 13, color: '#CBD5E1', lineHeight: 18, marginBottom: 8 },
+  location: { fontSize: 12, color: '#888888', marginBottom: 4 },
+  summary: { fontSize: 13, color: '#CCCCCC', lineHeight: 18, marginBottom: 8 },
   footer: { flexDirection: 'row', alignItems: 'center', gap: 10 },
   sevBadge: { borderRadius: 4, paddingHorizontal: 6, paddingVertical: 2 },
   sevText: { fontSize: 10, fontWeight: '700' },
-  conf: { fontSize: 10, color: '#64748B' },
-  time: { fontSize: 10, color: '#64748B', marginLeft: 'auto' },
+  conf: { fontSize: 10, color: '#666666' },
+  time: { fontSize: 10, color: '#666666', marginLeft: 'auto' },
 });

@@ -22,7 +22,7 @@ logger = logging.getLogger(__name__)
 
 genai.configure(api_key=settings.gemini_api_key)
 _model = genai.GenerativeModel(
-    model_name="gemini-2.0-flash",
+    model_name="gemini-2.0-flash-lite",
     generation_config={"temperature": 0.1, "max_output_tokens": 256},
 )
 
@@ -51,12 +51,34 @@ def _llm_classify(text: str) -> DetectionResult:
     except Exception as e:
         logger.warning(f"Gemini classification failed, using keyword fallback: {e}")
         score = keyword_score(text)
+        p_crisis = min(score * 1.4, 0.92) if score >= 0.2 else score
+        t = text.lower()
+        if any(k in t for k in ("flood", "sailab", "pani", "rain", "inundation")):
+            crisis_type = "flood"
+        elif any(k in t for k in ("fire", "wildfire", "blaze", "burning")):
+            crisis_type = "fire"
+        elif any(k in t for k in ("earthquake", "quake", "tremor", "seismic")):
+            crisis_type = "industrial"
+        elif any(k in t for k in ("blast", "explosion", "bomb", "attack")):
+            crisis_type = "civil"
+        elif any(k in t for k in ("protest", "rally", "blockage", "blocked", "demonstration")):
+            crisis_type = "civil"
+        elif any(k in t for k in ("accident", "crash", "collision", "road")):
+            crisis_type = "road_blockage"
+        elif any(k in t for k in ("heatwave", "heat wave", "temperature")):
+            crisis_type = "heatwave"
+        elif any(k in t for k in ("outbreak", "disease", "epidemic", "medical")):
+            crisis_type = "medical"
+        elif any(k in t for k in ("cyber", "hack", "breach", "network")):
+            crisis_type = "cyber"
+        else:
+            crisis_type = "unknown"
         return DetectionResult(
-            p_crisis=score,
-            crisis_type="unknown",
+            p_crisis=p_crisis,
+            crisis_type=crisis_type,
             location=None,
-            severity_hint=SeverityLevel.medium,
-            confidence=0.5,
+            severity_hint=SeverityLevel.high if p_crisis > 0.6 else SeverityLevel.medium,
+            confidence=0.6,
         )
 
 
